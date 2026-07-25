@@ -5,7 +5,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Paola Amarilla | Coach Laboral &amp; Consultora en Entrevistas</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300..900;1,300..900&amp;family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&amp;family=Poppins:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
@@ -77,21 +77,21 @@
                     "base": "8px"
             },
             "fontFamily": {
-                    "body-md": ["Hanken Grotesk"],
-                    "headline-lg": ["Fraunces"],
-                    "headline-lg-mobile": ["Fraunces"],
-                    "headline-md": ["Fraunces"],
-                    "display-lg": ["Fraunces"],
-                    "label-caps": ["Hanken Grotesk"],
-                    "body-lg": ["Hanken Grotesk"]
+                    "body-md": ["var(--font-body)"],
+                    "headline-lg": ["var(--font-heading)"],
+                    "headline-lg-mobile": ["var(--font-heading)"],
+                    "headline-md": ["var(--font-heading)"],
+                    "display-lg": ["var(--font-heading)"],
+                    "label-caps": ["var(--font-body)"],
+                    "body-lg": ["var(--font-body)"]
             },
             "fontSize": {
                     "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
-                    "headline-lg": ["38px", {"lineHeight": "1.2", "fontWeight": "600"}],
-                    "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "600"}],
-                    "headline-md": ["26px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                    "headline-lg": ["38px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "headline-md": ["26px", {"lineHeight": "1.3", "fontWeight": "600"}],
                     "display-lg": ["52px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "label-caps": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "label-caps": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.1em", "fontWeight": "500"}],
                     "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
             }
           },
@@ -99,6 +99,10 @@
       }
     </script>
 <style>
+        :root {
+            --font-heading: "Playfair Display", Georgia, "Times New Roman", serif;
+            --font-body: "Poppins", "Helvetica Neue", Arial, sans-serif;
+        }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
             display: inline-block;
@@ -110,6 +114,90 @@
         .editorial-shadow {
             box-shadow: 0px 4px 20px rgba(26, 26, 26, 0.05);
         }
+        .stats-marquee-mask {
+            -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+        }
+        .stat-item {
+            flex-shrink: 0;
+            text-align: center;
+            padding: 0 48px;
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        @media (max-width: 767px) {
+            .stat-item {
+                padding: 0 24px;
+            }
+            .stat-item p.text-headline-lg {
+                font-size: 22px;
+                line-height: 1.2;
+            }
+            .stat-item p.text-label-caps {
+                font-size: 10px;
+            }
+        }
+        @keyframes stats-marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+        .animate-stats-marquee {
+            animation: stats-marquee 22s linear infinite;
+        }
+        .animate-stats-marquee:hover {
+            animation-play-state: paused;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .animate-stats-marquee {
+                animation: none;
+            }
+        }
+        .tabs-scroll {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            scroll-snap-type: x proximity;
+            -webkit-mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
+            mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
+        }
+        .tabs-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        @media (min-width: 768px) {
+            .tabs-scroll {
+                -webkit-mask-image: none;
+                mask-image: none;
+            }
+        }
+        .service-tab {
+            scroll-snap-align: start;
+        }
+        #servicios-panels {
+            display: grid;
+        }
+        .service-panel {
+            grid-area: 1 / 1;
+            transition: opacity 250ms ease;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .service-panel {
+                transition: none;
+            }
+        }
+        .portrait-reveal {
+            opacity: 0;
+            transform: translateY(72px);
+            transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1), transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .portrait-reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .portrait-reveal {
+                transition: none;
+                opacity: 1;
+                transform: none;
+            }
+        }
     </style>
 </head>
 <body class="bg-background text-on-background font-body-md">
@@ -117,50 +205,49 @@
 <nav class="bg-nav-bg/70 backdrop-blur-md sticky top-0 z-50 border-b border-outline-variant/30 shadow-sm">
 <div class="flex justify-between items-center w-full px-6 py-3 max-w-container-max mx-auto">
 <a href="#" class="flex items-center shrink-0">
-<img alt="Paola Amarilla" class="h-9 md:h-11 w-auto" src="logolargo.png"/>
+<img alt="Paola Amarilla" class="hidden md:block h-14 w-auto" src="logo-transparente.png"/>
+<img alt="Paola Amarilla" class="md:hidden h-12 w-auto" src="logo-corto.png"/>
 </a>
 <div class="hidden md:flex items-center space-x-8">
-<a class="flex items-center gap-1.5 text-secondary hover:text-primary transition-colors duration-200 font-label-caps text-label-caps" href="#">
-<span class="material-symbols-outlined text-[18px]">home</span>Inicio
-</a>
+<a class="text-secondary hover:text-primary transition-colors duration-200 font-label-caps text-label-caps" href="#">Inicio</a>
 <a class="text-secondary hover:text-primary transition-colors duration-200 font-label-caps text-label-caps" href="#entrevistas">Entrevistas</a>
 <a class="text-secondary hover:text-primary transition-colors duration-200 font-label-caps text-label-caps" href="#consultoria">Consultoría</a>
 <a class="text-secondary hover:text-primary transition-colors duration-200 font-label-caps text-label-caps" href="#mentoring">Mentoring 1:1</a>
-<a class="bg-primary text-on-primary px-6 py-2.5 rounded-lg font-label-caps text-label-caps hover:opacity-90 transition-opacity active:scale-95" href="#">Agendar sesión</a>
+<a class="bg-primary text-on-primary px-6 py-2.5 rounded-[999px] font-label-caps text-label-caps hover:opacity-90 transition-opacity active:scale-95" href="https://wa.me/59597264469?text=Hola%20Paola!%20Quiero%20agendar%20una%20sesi%C3%B3n%20y%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n." rel="noopener noreferrer" target="_blank">Agendar sesión</a>
 </div>
 <!-- Mobile Menu Toggle -->
-<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menú" class="md:hidden text-primary" id="mobile-menu-toggle">
+<div class="flex items-center gap-3 md:hidden">
+<a class="bg-primary text-on-primary px-3 py-1.5 rounded-[999px] font-label-caps text-[10px] hover:opacity-90 transition-opacity active:scale-95" href="https://wa.me/59597264469?text=Hola%20Paola!%20Quiero%20agendar%20una%20sesi%C3%B3n%20y%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n." rel="noopener noreferrer" target="_blank">Agendar sesión</a>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menú" class="text-primary" id="mobile-menu-toggle">
 <span class="material-symbols-outlined" id="mobile-menu-icon">menu</span>
 </button>
 </div>
+</div>
 <!-- Mobile Menu Panel -->
 <div class="hidden md:hidden flex-col bg-nav-bg border-t border-outline-variant/30" id="mobile-menu">
-<a class="flex items-center gap-1.5 text-secondary hover:text-primary transition-colors duration-200 font-label-caps text-label-caps px-6 py-3" href="#">
-<span class="material-symbols-outlined text-[18px]">home</span>Inicio
-</a>
+<a class="text-secondary hover:text-primary transition-colors duration-200 font-label-caps text-label-caps px-6 py-3" href="#">Inicio</a>
 <a class="text-secondary hover:text-primary transition-colors duration-200 font-label-caps text-label-caps px-6 py-3" href="#entrevistas">Entrevistas</a>
 <a class="text-secondary hover:text-primary transition-colors duration-200 font-label-caps text-label-caps px-6 py-3" href="#consultoria">Consultoría</a>
 <a class="text-secondary hover:text-primary transition-colors duration-200 font-label-caps text-label-caps px-6 py-3" href="#mentoring">Mentoring 1:1</a>
-<a class="bg-primary text-on-primary text-center mx-6 mb-4 mt-1 px-6 py-2.5 rounded-lg font-label-caps text-label-caps hover:opacity-90 transition-opacity active:scale-95" href="#">Agendar sesión</a>
 </div>
 </nav>
 <!-- Hero Section -->
-<section class="relative pt-12 md:pt-16 pb-section-padding-mobile md:pb-section-padding-vertical px-6 overflow-hidden">
-<div class="max-w-container-max mx-auto grid md:grid-cols-2 gap-16 items-center">
-<div class="z-10">
-<span class="font-label-caps text-label-caps text-primary tracking-widest block mb-4 uppercase">Coach laboral • Ex RRHH • +7 años</span>
-<h1 class="font-display-lg text-[34px] md:text-display-lg mb-8 text-on-background">
+<section class="relative pt-10 md:pt-16 pb-8 md:pb-section-padding-vertical px-6 overflow-hidden">
+<div class="max-w-container-max mx-auto grid md:grid-cols-2 gap-8 md:gap-16 items-center">
+<div class="z-10 text-left">
+<span class="font-label-caps text-[10px] md:text-label-caps text-primary tracking-widest block mb-1 md:mb-4 uppercase text-center md:text-left">Coach laboral • Ex RRHH • +7 años</span>
+<h1 class="font-display-lg text-[32px] font-bold leading-[1.15] md:text-display-lg mb-4 md:mb-8 text-on-background text-center md:text-left">
                     Llegá a tu entrevista sabiendo <span class="italic font-normal text-primary">qué decir</span> y cómo transmitir tu valor
                 </h1>
-<p class="font-body-lg text-body-lg text-secondary mb-10 max-w-lg">
+<p class="font-body-lg text-xs leading-relaxed md:text-body-lg text-secondary mb-4 md:mb-10 max-w-lg text-center md:text-left">
                     Preparación estratégica 1:1 para profesionales que quieren destacarse, comunicar su experiencia con seguridad y conseguir el trabajo que quieren.
                 </p>
-<div class="flex flex-col sm:flex-row gap-4">
-<button class="bg-primary text-on-primary px-8 py-4 rounded-lg font-label-caps text-label-caps hover:opacity-90 transition-opacity editorial-shadow">Quiero prepararme para mi entrevista</button>
-<button class="border border-primary text-primary px-8 py-4 rounded-lg font-label-caps text-label-caps hover:bg-primary/5 transition-colors">Ver servicios</button>
+<div class="flex flex-col items-start gap-3 md:flex-row md:gap-4">
+<button class="bg-primary text-on-primary w-full md:w-auto px-6 py-3 md:px-8 md:py-4 rounded-[999px] font-label-caps text-label-caps hover:opacity-90 transition-opacity editorial-shadow">Quiero prepararme para mi entrevista</button>
+<a class="border border-primary text-primary w-full md:w-auto px-6 py-3 md:px-8 md:py-4 rounded-[999px] font-label-caps text-label-caps hover:bg-primary/5 transition-colors text-center" href="#servicios">Ver servicios</a>
 </div>
-<div class="mt-8 flex items-center gap-2">
-<div class="flex text-primary">
+<div class="hidden md:flex items-center gap-2 mt-8">
+<div class="flex text-primary text-base">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
@@ -170,13 +257,23 @@
 <span class="text-secondary font-label-caps text-label-caps">Recomendada por profesionales en LinkedIn</span>
 </div>
 </div>
-<div class="relative max-w-xs md:max-w-sm mx-auto">
+<div class="relative max-w-60 md:max-w-sm mx-auto">
 <div class="aspect-[4/5] rounded-xl overflow-hidden editorial-shadow bg-surface-container">
 <img alt="Paola Amarilla, coach laboral, sonriendo con una tablet en un entorno profesional." class="w-full h-full object-cover" src="imagen1.png"/>
 </div>
-<div class="absolute -bottom-8 -left-8 bg-white p-6 rounded-lg editorial-shadow hidden lg:block">
-<p class="font-headline-md text-headline-md text-primary mb-1">60 min</p>
-<p class="font-body-md text-body-md text-secondary">Sesión por Google Meet</p>
+<div class="md:hidden absolute bottom-3 left-3 z-10 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 shadow-sm">
+<div class="flex text-primary text-[9px] gap-0.5">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="text-secondary font-label-caps text-[9px] leading-tight block mt-0.5">Recomendada por profesionales en LinkedIn</span>
+</div>
+<div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-lg editorial-shadow hidden lg:block">
+<p class="font-headline-md text-lg text-primary mb-0.5">60 min</p>
+<p class="font-body-md text-xs text-secondary">Sesión por Google Meet</p>
 </div>
 <div class="absolute -top-6 -right-6 bg-primary-container text-on-primary-container p-4 rounded-lg editorial-shadow hidden lg:block">
 <p class="font-label-caps text-label-caps">Feedback personalizado</p>
@@ -184,24 +281,60 @@
 </div>
 </div>
 </section>
-<!-- Stats Bar -->
-<section class="bg-primary py-12">
-<div class="max-w-container-max mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-<div>
+<!-- Stats Bar (Carousel) -->
+<section class="bg-primary py-6 md:py-12 overflow-hidden">
+<div class="stats-marquee-mask">
+<div class="flex w-max animate-stats-marquee" id="stats-track">
+<!-- Set 1 -->
+<div class="stat-item">
 <p class="font-headline-lg text-headline-lg text-on-primary mb-1">+7</p>
-<p class="font-label-caps text-label-caps text-on-primary/70">años en RRHH</p>
+<p class="font-label-caps text-label-caps text-on-primary/70 whitespace-nowrap">años en RRHH</p>
 </div>
-<div>
+<div class="stat-item">
 <p class="font-headline-lg text-headline-lg text-on-primary mb-1">1:1</p>
-<p class="font-label-caps text-label-caps text-on-primary/70">Acompañamiento real</p>
+<p class="font-label-caps text-label-caps text-on-primary/70 whitespace-nowrap">Acompañamiento real</p>
 </div>
-<div>
+<div class="stat-item">
 <p class="font-headline-lg text-headline-lg text-on-primary mb-1">5.0</p>
-<p class="font-label-caps text-label-caps text-on-primary/70">en reseñas de LinkedIn</p>
+<p class="font-label-caps text-label-caps text-on-primary/70 whitespace-nowrap">en reseñas de LinkedIn</p>
 </div>
-<div>
+<div class="stat-item">
 <p class="font-headline-lg text-headline-lg text-on-primary mb-1">Meet</p>
-<p class="font-label-caps text-label-caps text-on-primary/70">Sesiones virtuales</p>
+<p class="font-label-caps text-label-caps text-on-primary/70 whitespace-nowrap">Sesiones virtuales</p>
+</div>
+<div class="stat-item">
+<p class="font-headline-lg text-headline-lg text-on-primary mb-1">+50</p>
+<p class="font-label-caps text-label-caps text-on-primary/70 whitespace-nowrap">profesionales acompañados</p>
+</div>
+<div class="stat-item">
+<p class="font-headline-lg text-headline-lg text-on-primary mb-1">+30</p>
+<p class="font-label-caps text-label-caps text-on-primary/70 whitespace-nowrap">entrevistas simuladas</p>
+</div>
+<!-- Set 2 (duplicate for seamless loop) -->
+<div class="stat-item" aria-hidden="true">
+<p class="font-headline-lg text-headline-lg text-on-primary mb-1">+7</p>
+<p class="font-label-caps text-label-caps text-on-primary/70 whitespace-nowrap">años en RRHH</p>
+</div>
+<div class="stat-item" aria-hidden="true">
+<p class="font-headline-lg text-headline-lg text-on-primary mb-1">1:1</p>
+<p class="font-label-caps text-label-caps text-on-primary/70 whitespace-nowrap">Acompañamiento real</p>
+</div>
+<div class="stat-item" aria-hidden="true">
+<p class="font-headline-lg text-headline-lg text-on-primary mb-1">5.0</p>
+<p class="font-label-caps text-label-caps text-on-primary/70 whitespace-nowrap">en reseñas de LinkedIn</p>
+</div>
+<div class="stat-item" aria-hidden="true">
+<p class="font-headline-lg text-headline-lg text-on-primary mb-1">Meet</p>
+<p class="font-label-caps text-label-caps text-on-primary/70 whitespace-nowrap">Sesiones virtuales</p>
+</div>
+<div class="stat-item" aria-hidden="true">
+<p class="font-headline-lg text-headline-lg text-on-primary mb-1">+50</p>
+<p class="font-label-caps text-label-caps text-on-primary/70 whitespace-nowrap">profesionales acompañados</p>
+</div>
+<div class="stat-item" aria-hidden="true">
+<p class="font-headline-lg text-headline-lg text-on-primary mb-1">+30</p>
+<p class="font-label-caps text-label-caps text-on-primary/70 whitespace-nowrap">entrevistas simuladas</p>
+</div>
 </div>
 </div>
 </section>
@@ -209,8 +342,8 @@
 <section class="py-section-padding-mobile md:py-section-padding-vertical px-6 bg-secondary-container/30" id="sobre-mi">
 <div class="max-w-container-max mx-auto grid md:grid-cols-2 gap-16 items-center">
 <div class="order-2 md:order-1">
-<div class="relative w-full max-w-md mx-auto">
-<div class="aspect-square rounded-full overflow-hidden border-[12px] border-white editorial-shadow">
+<div class="relative w-full max-w-60 md:max-w-md mx-auto">
+<div class="portrait-reveal aspect-[4/5] rounded-t-[999px] overflow-hidden editorial-shadow">
 <img alt="Retrato de Paola Amarilla, coach laboral y ex RRHH." class="w-full h-full object-cover" src="imagen1.png"/>
 </div>
 </div>
@@ -218,245 +351,263 @@
 <div class="order-1 md:order-2">
 <span class="font-label-caps text-label-caps text-primary mb-4 block uppercase tracking-widest">Sobre mí</span>
 <h2 class="font-headline-lg text-headline-lg md:text-display-lg mb-8">Hola, soy Pao</h2>
-<div class="space-y-6 text-secondary text-body-lg">
+<div class="space-y-6 text-secondary text-xs leading-relaxed md:text-body-lg">
 <p>Durante años trabajé en Recursos Humanos, acompañando procesos de selección y viendo de cerca qué buscan realmente los reclutadores al momento de elegir un candidato.</p>
 <p>Hoy acompaño a profesionales que quieren prepararse mejor para sus entrevistas, aprender a comunicar su experiencia con seguridad y llegar más confiados a esas oportunidades que pueden marcar una diferencia.</p>
-<p class="italic text-primary font-headline-md leading-relaxed">"Muchas veces no se trata de tener más experiencia, sino de saber mostrar todo lo que ya tenés."</p>
+<p class="italic text-primary font-headline-md text-base md:text-body-lg leading-relaxed">"Muchas veces no se trata de tener más experiencia, sino de saber mostrar todo lo que ya tenés."</p>
 <p class="font-label-caps text-label-caps text-on-background mt-8">Conocé mi perfil completo en LinkedIn: <a class="underline text-primary hover:opacity-80 transition-opacity" href="#">Haz click aquí</a></p>
 </div>
 </div>
 </div>
 </section>
-<!-- Servicios Section -->
-<section class="py-section-padding-mobile md:py-section-padding-vertical px-6 bg-white" id="servicios">
+<!-- Servicios Section (Tabs) -->
+<section class="py-section-padding-mobile md:py-section-padding-vertical px-6 bg-white scroll-mt-20" id="servicios">
 <div class="max-w-container-max mx-auto">
-<div class="text-center mb-20">
+<div class="text-center mb-16 max-w-3xl mx-auto">
 <span class="font-label-caps text-label-caps text-primary mb-4 block uppercase tracking-widest">Cómo puedo ayudarte</span>
-<h2 class="font-headline-lg text-headline-lg md:text-display-lg">Tres formas de trabajar juntos</h2>
+<h2 class="font-headline-lg text-headline-md md:text-display-lg">Tres formas de trabajar juntos</h2>
 </div>
-<div class="grid md:grid-cols-3 gap-8">
-<!-- Service 1 -->
-<div class="bg-surface p-10 rounded-xl border border-outline-variant/30 flex flex-col h-full editorial-shadow hover:-translate-y-2 transition-transform duration-300">
-<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-8">
-<span class="font-headline-md text-primary">1</span>
+<!-- Tabs -->
+<div class="relative mb-12 md:mb-16">
+<div aria-label="Formas de trabajar juntos" class="tabs-scroll flex md:flex-wrap md:justify-center gap-3 overflow-x-auto -mx-6 px-6 md:mx-0 md:px-0" id="servicios-tablist" role="tablist">
+<button aria-controls="panel-entrevistas" aria-selected="true" class="service-tab shrink-0 flex items-center gap-3 px-6 py-4 rounded-[999px] border transition-all duration-300 font-label-caps text-label-caps whitespace-nowrap bg-primary text-on-primary border-primary editorial-shadow scroll-mt-24 hover:-translate-y-0.5 hover:shadow-lg hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2" data-tab="entrevistas" id="entrevistas" role="tab" tabindex="0" type="button">
+<span class="font-headline-md text-lg md:text-headline-md opacity-60">1</span>
+<span>Entrenamiento para Entrevistas</span>
+</button>
+<button aria-controls="panel-consultoria" aria-selected="false" class="service-tab shrink-0 flex items-center gap-3 px-6 py-4 rounded-[999px] border transition-all duration-300 font-label-caps text-label-caps whitespace-nowrap bg-surface-container-low text-secondary border-transparent scroll-mt-24 hover:-translate-y-0.5 hover:shadow-md hover:brightness-95 hover:border-outline-variant focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2" data-tab="consultoria" id="consultoria" role="tab" tabindex="-1" type="button">
+<span class="font-headline-md text-lg md:text-headline-md opacity-60">2</span>
+<span>Consultoría</span>
+</button>
+<button aria-controls="panel-mentoring" aria-selected="false" class="service-tab shrink-0 flex items-center gap-3 px-6 py-4 rounded-[999px] border transition-all duration-300 font-label-caps text-label-caps whitespace-nowrap bg-surface-container-low text-secondary border-transparent scroll-mt-24 hover:-translate-y-0.5 hover:shadow-md hover:brightness-95 hover:border-outline-variant focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2" data-tab="mentoring" id="mentoring" role="tab" tabindex="-1" type="button">
+<span class="font-headline-md text-lg md:text-headline-md opacity-60">3</span>
+<span>Mentoring 1:1</span>
+</button>
 </div>
-<h3 class="font-headline-md text-headline-md mb-4">Entrenamiento para Entrevistas</h3>
-<p class="text-secondary mb-8 flex-grow">Sesión de 60 min con simulación real, feedback y estrategia para tu próxima entrevista.</p>
-<a class="font-label-caps text-label-caps text-primary flex items-center gap-2 group" href="#entrevistas">
-                        Ver más <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-</a>
+<button aria-label="Ver tabs anteriores" class="md:hidden absolute left-0 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm shadow-sm flex items-center justify-center text-primary opacity-0 transition-opacity duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" id="tabs-scroll-hint-left" style="opacity: 0;" type="button">
+<span class="material-symbols-outlined" style="font-size: 18px;">chevron_left</span>
+</button>
+<button aria-label="Ver más tabs" class="md:hidden absolute right-0 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm shadow-sm flex items-center justify-center text-primary transition-opacity duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" id="tabs-scroll-hint" type="button">
+<span class="material-symbols-outlined" style="font-size: 18px;">chevron_right</span>
+</button>
 </div>
-<!-- Service 2 -->
-<div class="bg-surface p-10 rounded-xl border border-outline-variant/30 flex flex-col h-full editorial-shadow hover:-translate-y-2 transition-transform duration-300">
-<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-8">
-<span class="font-headline-md text-primary">2</span>
-</div>
-<h3 class="font-headline-md text-headline-md mb-4">Consultoría</h3>
-<p class="text-secondary mb-8 flex-grow">Espacio 1:1 para ordenar tu momento profesional y encontrar claridad sobre tus próximos pasos.</p>
-<a class="font-label-caps text-label-caps text-primary flex items-center gap-2 group" href="#consultoria">
-                        Ver más <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-</a>
-</div>
-<!-- Service 3 -->
-<div class="bg-surface p-10 rounded-xl border border-outline-variant/30 flex flex-col h-full editorial-shadow hover:-translate-y-2 transition-transform duration-300">
-<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-8">
-<span class="font-headline-md text-primary">3</span>
-</div>
-<h3 class="font-headline-md text-headline-md mb-4">Mentoring 1:1</h3>
-<p class="text-secondary mb-8 flex-grow">Proceso de 2 sesiones para construir tu posicionamiento y diferenciarte de otros candidatos.</p>
-<a class="font-label-caps text-label-caps text-primary flex items-center gap-2 group" href="#mentoring">
-                        Ver más <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-</a>
-</div>
-</div>
-</div>
-</section>
-<!-- Entrevistas Section (Bento) -->
-<section class="py-section-padding-mobile md:py-section-padding-vertical px-6 bg-tertiary" id="entrevistas">
-<div class="max-w-container-max mx-auto">
-<div class="text-center mb-20 max-w-3xl mx-auto">
-<span class="font-label-caps text-label-caps text-primary-fixed-dim mb-4 block uppercase tracking-widest">Entrenamiento para Entrevistas</span>
-<h2 class="font-headline-lg text-headline-lg md:text-display-lg text-on-tertiary mb-6">Entrenamiento personalizado para entrevistas laborales</h2>
-<p class="font-body-lg text-body-lg text-on-tertiary/70">Durante 60 minutos trabajamos tu perfil, simulamos una entrevista real y salís con recomendaciones concretas para mejorar tu desempeño.</p>
+<!-- Panels -->
+<div id="servicios-panels">
+<!-- Panel: Entrenamiento para Entrevistas -->
+<div aria-hidden="false" aria-labelledby="entrevistas" class="service-panel opacity-100" data-tab-panel="entrevistas" id="panel-entrevistas" role="tabpanel">
+<div class="text-center mb-12 max-w-3xl mx-auto">
+<h3 class="font-headline-md text-xl font-semibold md:text-headline-lg mb-4">Entrenamiento personalizado para entrevistas laborales</h3>
+<p class="font-body-lg text-sm leading-relaxed md:text-body-lg text-secondary">Durante 60 minutos trabajamos tu perfil, simulamos una entrevista real y salís con recomendaciones concretas para mejorar tu desempeño.</p>
 </div>
 <div class="grid lg:grid-cols-5 gap-8">
-<div class="lg:col-span-3 space-y-6">
-<h4 class="font-headline-md text-headline-md text-on-tertiary mb-8">En esta sesión vas a trabajar:</h4>
-<div class="grid gap-4">
-<div class="bg-white p-6 rounded-lg border-l-4 border-primary editorial-shadow flex gap-4">
-<span class="font-bold text-primary">1</span>
-<p class="text-on-background"><strong class="font-semibold">Simulación real de entrevista</strong> — Para ganar confianza, conocer cómo estás respondiendo hoy y mejorar tu forma de comunicar tu experiencia.</p>
+<div class="lg:col-span-3 h-full flex flex-col">
+<h4 class="relative inline-block font-headline-md text-lg md:text-headline-md text-primary font-semibold mb-6 md:mb-8 pb-3">
+En esta sesión vas a trabajar:
+<span aria-hidden="true" class="absolute bottom-0 left-0 h-0.5 w-10 md:w-14 bg-primary/40 rounded-full"></span>
+</h4>
+<div class="divide-y divide-outline-variant/50 flex-1 flex flex-col justify-center">
+<div class="flex gap-5 md:gap-6 items-start py-5 first:pt-0 last:pb-0">
+<span aria-hidden="true" class="font-headline-lg text-lg md:text-headline-lg text-primary/25 shrink-0 w-8 md:w-12 leading-none">01</span>
+<p class="text-on-background text-sm md:text-base pt-1"><strong class="font-semibold block mb-1">Simulación real de entrevista</strong>Para ganar confianza, conocer cómo estás respondiendo hoy y mejorar tu forma de comunicar tu experiencia.</p>
 </div>
-<div class="bg-white p-6 rounded-lg border-l-4 border-primary editorial-shadow flex gap-4">
-<span class="font-bold text-primary">2</span>
-<p class="text-on-background"><strong class="font-semibold">Feedback personalizado</strong> — Qué comunicás bien y qué podés mejorar para generar más impacto.</p>
+<div class="flex gap-5 md:gap-6 items-start py-5 first:pt-0 last:pb-0">
+<span aria-hidden="true" class="font-headline-lg text-lg md:text-headline-lg text-primary/25 shrink-0 w-8 md:w-12 leading-none">02</span>
+<p class="text-on-background text-sm md:text-base pt-1"><strong class="font-semibold block mb-1">Feedback personalizado</strong>Qué comunicás bien y qué podés mejorar para generar más impacto.</p>
 </div>
-<div class="bg-white p-6 rounded-lg border-l-4 border-primary editorial-shadow flex gap-4">
-<span class="font-bold text-primary">3</span>
-<p class="text-on-background"><strong class="font-semibold">Comunicación verbal y no verbal</strong> — Tono de voz, postura y seguridad al transmitir tu mensaje.</p>
+<div class="flex gap-5 md:gap-6 items-start py-5 first:pt-0 last:pb-0">
+<span aria-hidden="true" class="font-headline-lg text-lg md:text-headline-lg text-primary/25 shrink-0 w-8 md:w-12 leading-none">03</span>
+<p class="text-on-background text-sm md:text-base pt-1"><strong class="font-semibold block mb-1">Comunicación verbal y no verbal</strong>Tono de voz, postura y seguridad al transmitir tu mensaje.</p>
 </div>
-<div class="bg-white p-6 rounded-lg border-l-4 border-primary editorial-shadow flex gap-4">
-<span class="font-bold text-primary">4</span>
-<p class="text-on-background"><strong class="font-semibold">Storytelling profesional</strong> — Transformá tu experiencia en una historia que destaque tu valor.</p>
+<div class="flex gap-5 md:gap-6 items-start py-5 first:pt-0 last:pb-0">
+<span aria-hidden="true" class="font-headline-lg text-lg md:text-headline-lg text-primary/25 shrink-0 w-8 md:w-12 leading-none">04</span>
+<p class="text-on-background text-sm md:text-base pt-1"><strong class="font-semibold block mb-1">Storytelling profesional</strong>Transformá tu experiencia en una historia que destaque tu valor.</p>
 </div>
 </div>
 </div>
-<div class="lg:col-span-2 bg-primary text-on-primary p-10 md:p-12 rounded-xl flex flex-col justify-center gap-10 editorial-shadow">
+<div class="lg:col-span-2 flex flex-col gap-6">
+<div class="bg-surface-container-low border border-outline-variant/50 rounded-tl-xl rounded-tr-full rounded-br-lg rounded-bl-lg p-5 md:p-6 flex gap-4 items-start">
+<div class="shrink-0 w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-size: 22px;">chat_bubble</span>
+</div>
 <div>
-<span class="material-symbols-outlined text-on-primary mb-4 block" style="font-size: 32px;">menu_book</span>
-<h4 class="font-headline-md text-headline-md text-on-primary mb-2">Tu sesión también incluye</h4>
-<p class="font-bold mb-1">Guía práctica de preparación para entrevistas</p>
-<p class="text-on-primary/80">Material complementario con preguntas frecuentes y herramientas para antes, durante y después de tu entrevista.</p>
+<p class="font-label-caps text-base md:text-lg text-primary font-semibold uppercase tracking-wide mb-1.5">Tu sesión también incluye</p>
+<p class="text-sm text-on-background/70 mb-1">Guía práctica de preparación para entrevistas</p>
+<p class="text-secondary text-sm leading-relaxed">Material complementario con preguntas frecuentes y herramientas para antes, durante y después de tu entrevista.</p>
 </div>
-<div class="border-t border-on-primary/20 pt-8">
-<h4 class="font-headline-md text-headline-md text-on-primary mb-6">Después de esta sesión vas a estar preparado para:</h4>
-<ul class="space-y-4">
-<li class="flex gap-3 items-start">
-<span class="material-symbols-outlined text-on-primary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="text-on-primary/90">Llegar con mayor confianza</span>
+</div>
+<div class="flex-1 bg-primary text-on-primary p-8 md:p-10 rounded-tl-full rounded-tr-xl rounded-br-full rounded-bl-xl flex flex-col justify-center editorial-shadow relative overflow-hidden">
+<div aria-hidden="true" class="absolute -bottom-12 -right-12 w-40 h-40 bg-on-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+<h4 class="font-headline-md text-base font-semibold md:text-headline-md text-on-primary mb-4 relative">Después de esta sesión vas a estar preparado para:</h4>
+<ul class="space-y-3 md:space-y-4 relative">
+<li class="flex gap-3 items-center">
+<span class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-on-primary/15 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary" style="font-size: 14px; font-variation-settings: 'FILL' 0, 'wght' 600;">check</span>
+</span>
+<span class="text-on-primary/90 text-sm md:text-base">Llegar con mayor confianza</span>
 </li>
-<li class="flex gap-3 items-start">
-<span class="material-symbols-outlined text-on-primary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="text-on-primary/90">Responder con estructura y seguridad</span>
+<li class="flex gap-3 items-center">
+<span class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-on-primary/15 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary" style="font-size: 14px; font-variation-settings: 'FILL' 0, 'wght' 600;">check</span>
+</span>
+<span class="text-on-primary/90 text-sm md:text-base">Responder con estructura y seguridad</span>
 </li>
-<li class="flex gap-3 items-start">
-<span class="material-symbols-outlined text-on-primary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="text-on-primary/90">Comunicar mejor tu experiencia y logros</span>
+<li class="flex gap-3 items-center">
+<span class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-on-primary/15 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary" style="font-size: 14px; font-variation-settings: 'FILL' 0, 'wght' 600;">check</span>
+</span>
+<span class="text-on-primary/90 text-sm md:text-base">Comunicar mejor tu experiencia y logros</span>
 </li>
-<li class="flex gap-3 items-start">
-<span class="material-symbols-outlined text-on-primary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="text-on-primary/90">Tener una estrategia clara para futuras oportunidades</span>
+<li class="flex gap-3 items-center">
+<span class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-on-primary/15 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary" style="font-size: 14px; font-variation-settings: 'FILL' 0, 'wght' 600;">check</span>
+</span>
+<span class="text-on-primary/90 text-sm md:text-base">Tener una estrategia clara para futuras oportunidades</span>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="text-center mt-16">
-<button class="bg-on-tertiary text-primary px-10 py-4 rounded-lg font-label-caps text-label-caps hover:opacity-90 transition-opacity editorial-shadow">Agendar sesión</button>
+<a class="bg-primary text-on-primary px-10 py-4 rounded-[999px] font-label-caps text-label-caps hover:opacity-90 transition-opacity editorial-shadow inline-block" href="https://wa.me/59597264469?text=Hola%20Paola!%20Quiero%20agendar%20una%20sesi%C3%B3n%20y%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n." rel="noopener noreferrer" target="_blank">Agendar sesión</a>
 </div>
 </div>
-</section>
-<!-- Claridad Section (Bento Inspired) -->
-<section class="py-section-padding-mobile md:py-section-padding-vertical px-6 bg-secondary-container/20" id="consultoria">
-<div class="max-w-container-max mx-auto">
-<div class="text-center mb-20 max-w-3xl mx-auto">
-<span class="font-label-caps text-label-caps text-primary mb-4 block uppercase tracking-widest">Consultoría 1:1</span>
-<h2 class="font-headline-lg text-headline-lg md:text-display-lg mb-6">Claridad para decidir tu próximo paso</h2>
-<p class="font-headline-md text-headline-md text-primary italic">"Las mejores decisiones profesionales empiezan cuando tenés claridad sobre dónde estás y hacia dónde querés ir."</p>
+<!-- Panel: Consultoría -->
+<div aria-hidden="true" aria-labelledby="consultoria" class="service-panel opacity-0 pointer-events-none" data-tab-panel="consultoria" id="panel-consultoria" inert="" role="tabpanel">
+<div class="text-center mb-12 max-w-3xl mx-auto">
+<h3 class="font-headline-md text-xl font-semibold md:text-headline-lg mb-4">Claridad para decidir tu próximo paso</h3>
+<p class="font-headline-md text-base md:text-headline-md text-primary italic">"Las mejores decisiones profesionales empiezan cuando tenés claridad sobre dónde estás y hacia dónde querés ir."</p>
 </div>
 <div class="grid lg:grid-cols-5 gap-8">
-<div class="lg:col-span-3 space-y-6">
-<h4 class="font-headline-md text-headline-md mb-8">¿Para qué sirve?</h4>
-<div class="grid gap-4">
-<div class="bg-white p-6 rounded-lg border-l-4 border-primary editorial-shadow flex gap-4">
-<span class="font-bold text-primary">1</span>
-<p class="text-on-background"><strong class="font-semibold">Analizar tu momento profesional</strong> — Entender dónde estás hoy y qué necesitás para avanzar.</p>
+<div class="lg:col-span-3 h-full flex flex-col">
+<h4 class="relative inline-block font-headline-md text-lg md:text-headline-md text-primary font-semibold mb-6 md:mb-8 pb-3">
+¿Para qué sirve?
+<span aria-hidden="true" class="absolute bottom-0 left-0 h-0.5 w-10 md:w-14 bg-primary/40 rounded-full"></span>
+</h4>
+<div class="divide-y divide-outline-variant/50 flex-1 flex flex-col justify-center">
+<div class="flex gap-5 md:gap-6 items-start py-5 first:pt-0 last:pb-0">
+<span aria-hidden="true" class="font-headline-lg text-lg md:text-headline-lg text-primary/25 shrink-0 w-8 md:w-12 leading-none">01</span>
+<p class="text-on-background text-sm md:text-base pt-1"><strong class="font-semibold block mb-1">Analizar tu momento profesional</strong>Entender dónde estás hoy y qué necesitás para avanzar.</p>
 </div>
-<div class="bg-white p-6 rounded-lg border-l-4 border-primary editorial-shadow flex gap-4">
-<span class="font-bold text-primary">2</span>
-<p class="text-on-background"><strong class="font-semibold">Ordenar ideas y prioridades</strong> — Bajar todo lo que tenés en mente y darle estructura a tus próximos pasos.</p>
+<div class="flex gap-5 md:gap-6 items-start py-5 first:pt-0 last:pb-0">
+<span aria-hidden="true" class="font-headline-lg text-lg md:text-headline-lg text-primary/25 shrink-0 w-8 md:w-12 leading-none">02</span>
+<p class="text-on-background text-sm md:text-base pt-1"><strong class="font-semibold block mb-1">Ordenar ideas y prioridades</strong>Bajar todo lo que tenés en mente y darle estructura a tus próximos pasos.</p>
 </div>
-<div class="bg-white p-6 rounded-lg border-l-4 border-primary editorial-shadow flex gap-4">
-<span class="font-bold text-primary">3</span>
-<p class="text-on-background"><strong class="font-semibold">Identificar qué frena tu avance</strong> — Detectar patrones, dudas o situaciones que limitan tus decisiones.</p>
+<div class="flex gap-5 md:gap-6 items-start py-5 first:pt-0 last:pb-0">
+<span aria-hidden="true" class="font-headline-lg text-lg md:text-headline-lg text-primary/25 shrink-0 w-8 md:w-12 leading-none">03</span>
+<p class="text-on-background text-sm md:text-base pt-1"><strong class="font-semibold block mb-1">Identificar qué frena tu avance</strong>Detectar patrones, dudas o situaciones que limitan tus decisiones.</p>
 </div>
-<div class="bg-white p-6 rounded-lg border-l-4 border-primary editorial-shadow flex gap-4">
-<span class="font-bold text-primary">4</span>
-<p class="text-on-background"><strong class="font-semibold">Conversar sobre tus desafíos</strong> — Un espacio para hablar de aquello que hoy te preocupa o genera incertidumbre.</p>
+<div class="flex gap-5 md:gap-6 items-start py-5 first:pt-0 last:pb-0">
+<span aria-hidden="true" class="font-headline-lg text-lg md:text-headline-lg text-primary/25 shrink-0 w-8 md:w-12 leading-none">04</span>
+<p class="text-on-background text-sm md:text-base pt-1"><strong class="font-semibold block mb-1">Conversar sobre tus desafíos</strong>Un espacio para hablar de aquello que hoy te preocupa o genera incertidumbre.</p>
 </div>
 </div>
 </div>
-<div class="lg:col-span-2 bg-primary text-on-primary p-12 rounded-xl flex flex-col justify-center">
-<h4 class="font-headline-md text-headline-md mb-10 text-on-primary">¿Cómo funciona?</h4>
-<ul class="space-y-8">
-<li class="flex gap-6">
-<div class="w-10 h-10 shrink-0 border border-on-primary/30 rounded-full flex items-center justify-center font-bold">1</div>
+<div class="lg:col-span-2 bg-primary text-on-primary p-10 md:p-12 rounded-tl-full rounded-tr-xl rounded-br-full rounded-bl-xl flex flex-col justify-center relative overflow-hidden">
+<div aria-hidden="true" class="absolute -bottom-14 -left-14 w-40 h-40 bg-on-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+<h4 class="font-headline-md text-base font-semibold md:text-headline-md mb-4 md:mb-10 text-on-primary relative">¿Cómo funciona?</h4>
+<ol class="relative space-y-5 md:space-y-8">
+<div aria-hidden="true" class="absolute left-3.5 md:left-4 top-3 bottom-3 w-px bg-on-primary/25"></div>
+<li class="relative flex gap-4 md:gap-6">
+<div class="w-7 h-7 md:w-8 md:h-8 shrink-0 bg-on-primary text-primary rounded-full flex items-center justify-center text-xs md:text-sm font-bold relative z-10">1</div>
 <div>
-<p class="font-bold mb-1">Agendás tu sesión</p>
-<p class="text-on-primary/80">Elegís el momento que mejor se adapte a vos.</p>
+<p class="font-bold text-sm md:text-base mb-1">Agendás tu sesión</p>
+<p class="text-on-primary/80 text-sm md:text-base">Elegís el momento que mejor se adapte a vos.</p>
 </div>
 </li>
-<li class="flex gap-6">
-<div class="w-10 h-10 shrink-0 border border-on-primary/30 rounded-full flex items-center justify-center font-bold">2</div>
+<li class="relative flex gap-4 md:gap-6">
+<div class="w-7 h-7 md:w-8 md:h-8 shrink-0 bg-on-primary text-primary rounded-full flex items-center justify-center text-xs md:text-sm font-bold relative z-10">2</div>
 <div>
-<p class="font-bold mb-1">Conversación estratégica</p>
-<p class="text-on-primary/80">Un espacio enfocado 100% en tu situación, objetivos y contexto profesional.</p>
+<p class="font-bold text-sm md:text-base mb-1">Conversación estratégica</p>
+<p class="text-on-primary/80 text-sm md:text-base">Un espacio enfocado 100% en tu situación, objetivos y contexto profesional.</p>
 </div>
 </li>
-<li class="flex gap-6">
-<div class="w-10 h-10 shrink-0 border border-on-primary/30 rounded-full flex items-center justify-center font-bold">3</div>
+<li class="relative flex gap-4 md:gap-6">
+<div class="w-7 h-7 md:w-8 md:h-8 shrink-0 bg-on-primary text-primary rounded-full flex items-center justify-center text-xs md:text-sm font-bold relative z-10">3</div>
 <div>
-<p class="font-bold mb-1">Te llevás claridad y próximos pasos</p>
-<p class="text-on-primary/80">Una mirada más ordenada sobre tu situación y acciones concretas para avanzar.</p>
+<p class="font-bold text-sm md:text-base mb-1">Te llevás claridad y próximos pasos</p>
+<p class="text-on-primary/80 text-sm md:text-base">Una mirada más ordenada sobre tu situación y acciones concretas para avanzar.</p>
 </div>
 </li>
-</ul>
+</ol>
 </div>
 </div>
+<div class="text-center mt-16">
+<a class="bg-primary text-on-primary px-10 py-4 rounded-[999px] font-label-caps text-label-caps hover:opacity-90 transition-opacity editorial-shadow inline-block" href="https://wa.me/59597264469?text=Hola%20Paola!%20Quiero%20agendar%20una%20sesi%C3%B3n%20y%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n." rel="noopener noreferrer" target="_blank">Agendar sesión</a>
 </div>
-</section>
-<!-- Mentoring Section (Bento) -->
-<section class="py-section-padding-mobile md:py-section-padding-vertical px-6 bg-tertiary" id="mentoring">
-<div class="max-w-container-max mx-auto">
-<div class="text-center mb-20 max-w-3xl mx-auto">
-<span class="font-label-caps text-label-caps text-primary-fixed-dim mb-4 block uppercase tracking-widest">Mentoring 1:1</span>
-<h2 class="font-headline-lg text-headline-lg md:text-display-lg text-on-tertiary mb-6">Conseguí el trabajo que querés. Con estrategia y preparación.</h2>
-<p class="font-body-lg text-body-lg text-on-tertiary/70">Un proceso personalizado para construir tu perfil profesional con posicionamiento, prepararte para entrevistas y diferenciarte de otros candidatos. Dos sesiones, cada una con un objetivo claro.</p>
+</div>
+<!-- Panel: Mentoring 1:1 -->
+<div aria-hidden="true" aria-labelledby="mentoring" class="service-panel opacity-0 pointer-events-none" data-tab-panel="mentoring" id="panel-mentoring" inert="" role="tabpanel">
+<div class="text-center mb-12 max-w-3xl mx-auto">
+<h3 class="font-headline-md text-xl font-semibold md:text-headline-lg mb-4">Conseguí el trabajo que querés. Con estrategia y preparación.</h3>
+<p class="font-body-lg text-sm leading-relaxed md:text-body-lg text-secondary">Un proceso personalizado para construir tu perfil profesional con posicionamiento, prepararte para entrevistas y diferenciarte de otros candidatos. Dos sesiones, cada una con un objetivo claro.</p>
 </div>
 <div class="grid lg:grid-cols-5 gap-8">
 <div class="lg:col-span-3">
-<h4 class="font-headline-md text-headline-md text-on-tertiary mb-8">Todo lo que vas a trabajar</h4>
-<div class="grid sm:grid-cols-2 gap-4">
-<div class="bg-white p-5 rounded-lg editorial-shadow flex gap-3 items-start">
-<span class="material-symbols-outlined text-primary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<p class="text-on-background">Definir con claridad tu objetivo laboral</p>
+<h4 class="relative inline-block font-headline-md text-lg md:text-headline-md text-primary font-semibold mb-6 md:mb-8 pb-3">
+Todo lo que vas a trabajar
+<span aria-hidden="true" class="absolute bottom-0 left-0 h-0.5 w-10 md:w-14 bg-primary/40 rounded-full"></span>
+</h4>
+<div class="grid sm:grid-cols-2 gap-3 md:gap-4">
+<div class="bg-surface-container-low p-4 md:p-5 rounded-tl-xl rounded-br-xl flex gap-3 items-start">
+<span class="material-symbols-outlined text-primary shrink-0 text-lg md:text-2xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<p class="text-on-background text-sm md:text-base">Definir con claridad tu objetivo laboral</p>
 </div>
-<div class="bg-white p-5 rounded-lg editorial-shadow flex gap-3 items-start">
-<span class="material-symbols-outlined text-primary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<p class="text-on-background">Mejorar cómo estás siendo percibido/a</p>
+<div class="bg-surface-container-low p-4 md:p-5 rounded-tr-xl rounded-bl-xl flex gap-3 items-start">
+<span class="material-symbols-outlined text-primary shrink-0 text-lg md:text-2xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<p class="text-on-background text-sm md:text-base">Mejorar cómo estás siendo percibido/a</p>
 </div>
-<div class="bg-white p-5 rounded-lg editorial-shadow flex gap-3 items-start">
-<span class="material-symbols-outlined text-primary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<p class="text-on-background">Optimizar tu CV y LinkedIn con enfoque estratégico</p>
+<div class="bg-surface-container-low p-4 md:p-5 rounded-tl-xl rounded-br-xl flex gap-3 items-start">
+<span class="material-symbols-outlined text-primary shrink-0 text-lg md:text-2xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<p class="text-on-background text-sm md:text-base">Optimizar tu CV y LinkedIn con enfoque estratégico</p>
 </div>
-<div class="bg-white p-5 rounded-lg editorial-shadow flex gap-3 items-start">
-<span class="material-symbols-outlined text-primary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<p class="text-on-background">Desarrollar una narrativa profesional convincente</p>
+<div class="bg-surface-container-low p-4 md:p-5 rounded-tr-xl rounded-bl-xl flex gap-3 items-start">
+<span class="material-symbols-outlined text-primary shrink-0 text-lg md:text-2xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<p class="text-on-background text-sm md:text-base">Desarrollar una narrativa profesional convincente</p>
 </div>
-<div class="bg-white p-5 rounded-lg editorial-shadow flex gap-3 items-start">
-<span class="material-symbols-outlined text-primary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<p class="text-on-background">Prepararte para entrevistas reales con seguridad</p>
+<div class="bg-surface-container-low p-4 md:p-5 rounded-tl-xl rounded-br-xl flex gap-3 items-start">
+<span class="material-symbols-outlined text-primary shrink-0 text-lg md:text-2xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<p class="text-on-background text-sm md:text-base">Prepararte para entrevistas reales con seguridad</p>
 </div>
-<div class="bg-white p-5 rounded-lg editorial-shadow flex gap-3 items-start">
-<span class="material-symbols-outlined text-primary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<p class="text-on-background">Corregir errores de comunicación en entrevistas</p>
+<div class="bg-surface-container-low p-4 md:p-5 rounded-tr-xl rounded-bl-xl flex gap-3 items-start">
+<span class="material-symbols-outlined text-primary shrink-0 text-lg md:text-2xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<p class="text-on-background text-sm md:text-base">Corregir errores de comunicación en entrevistas</p>
 </div>
 </div>
 </div>
-<div class="lg:col-span-2 bg-primary text-on-primary p-10 md:p-12 rounded-xl flex flex-col justify-center editorial-shadow">
-<h4 class="font-headline-md text-headline-md text-on-primary mb-8">Este mentoring es para vos si...</h4>
-<ul class="space-y-6">
-<li class="flex gap-3 items-start">
-<span class="material-symbols-outlined text-on-primary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="text-on-primary/90">Estás buscando trabajo</span>
+<div class="lg:col-span-2 lg:mt-6 bg-primary text-on-primary p-10 md:p-12 rounded-tl-xl rounded-tr-full rounded-br-xl rounded-bl-full flex flex-col justify-center editorial-shadow relative overflow-hidden">
+<div aria-hidden="true" class="absolute -bottom-10 -right-10 w-40 h-40 bg-on-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+<h4 class="font-headline-md text-base font-semibold md:text-headline-md text-on-primary mb-4 md:mb-8 relative">Este mentoring es para vos si...</h4>
+<ul class="space-y-4 md:space-y-6 relative">
+<li class="flex gap-3 items-center">
+<span class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-on-primary/15 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary" style="font-size: 14px; font-variation-settings: 'FILL' 0, 'wght' 600;">check</span>
+</span>
+<span class="text-on-primary/90 text-sm md:text-base">Estás buscando trabajo</span>
 </li>
-<li class="flex gap-3 items-start">
-<span class="material-symbols-outlined text-on-primary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="text-on-primary/90">Querés cambiar de trabajo</span>
+<li class="flex gap-3 items-center">
+<span class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-on-primary/15 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary" style="font-size: 14px; font-variation-settings: 'FILL' 0, 'wght' 600;">check</span>
+</span>
+<span class="text-on-primary/90 text-sm md:text-base">Querés cambiar de trabajo</span>
 </li>
-<li class="flex gap-3 items-start">
-<span class="material-symbols-outlined text-on-primary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="text-on-primary/90">Sos semi senior, senior o líder</span>
+<li class="flex gap-3 items-center">
+<span class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-on-primary/15 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary" style="font-size: 14px; font-variation-settings: 'FILL' 0, 'wght' 600;">check</span>
+</span>
+<span class="text-on-primary/90 text-sm md:text-base">Sos semi senior, senior o líder</span>
 </li>
-<li class="flex gap-3 items-start">
-<span class="material-symbols-outlined text-on-primary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="text-on-primary/90">Tu CV está "más o menos"</span>
+<li class="flex gap-3 items-center">
+<span class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-on-primary/15 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary" style="font-size: 14px; font-variation-settings: 'FILL' 0, 'wght' 600;">check</span>
+</span>
+<span class="text-on-primary/90 text-sm md:text-base">Tu CV está "más o menos"</span>
 </li>
 </ul>
 </div>
 </div>
 <div class="text-center mt-16">
-<button class="bg-on-tertiary text-primary px-10 py-4 rounded-lg font-label-caps text-label-caps hover:opacity-90 transition-opacity editorial-shadow">Agendar sesión</button>
+<a class="bg-primary text-on-primary px-10 py-4 rounded-[999px] font-label-caps text-label-caps hover:opacity-90 transition-opacity editorial-shadow inline-block" href="https://wa.me/59597264469?text=Hola%20Paola!%20Quiero%20agendar%20una%20sesi%C3%B3n%20y%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n." rel="noopener noreferrer" target="_blank">Agendar sesión</a>
+</div>
+</div>
 </div>
 </div>
 </section>
@@ -464,8 +615,8 @@
 <section class="py-section-padding-mobile md:py-section-padding-vertical px-6 bg-white overflow-hidden">
 <div class="max-w-container-max mx-auto">
 <div class="text-center mb-20">
-<span class="font-label-caps text-label-caps text-primary mb-4 block uppercase tracking-widest">Resultados reales</span>
-<h2 class="font-headline-lg text-headline-lg md:text-display-lg">Lo que dicen quienes ya trabajaron conmigo</h2>
+<span class="font-label-caps text-[10px] md:text-label-caps text-primary mb-4 block uppercase tracking-widest">Resultados reales</span>
+<h2 class="font-headline-lg text-headline-md md:text-display-lg">Lo que dicen quienes ya trabajaron conmigo</h2>
 </div>
 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 <!-- Testimonial 1 -->
@@ -475,7 +626,7 @@
 <img class="w-full h-full object-cover" data-alt="A professional headshot of Alex Ortega, a male financial sector professional. He is wearing a structured blazer and has a friendly, expert appearance. High-quality corporate photography style, soft neutral background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCduv9Z5CNxqwUMN9i0_NDqoPOg9iaRmYTNXTcjCbHcvy6HxeHSM816HbMt8EGItTTxeS5gA5oAgueO0VOhvu4ZXpLErumU6avMklD-fLP1Uu_MzLmiDo9f1Q9Y4cNuRkH-Xmqq1Ai9nPeZJwrYRsLAXv9WfqF5nmM6ZO_jIGGsF4Tfoe2UqWC8ylTiow0q9DdY-1UMxghw-0dBvvBCBhBRJWoBnT067FwpJlURoteKqREc2XE2QOPcW3BiOzghIcOntIwevqPYsQ"/>
 </div>
 <div>
-<p class="font-bold text-on-background">Alex Ortega</p>
+<p class="font-bold text-sm md:text-base text-on-background">Alex Ortega</p>
 <p class="text-xs text-secondary">Especialista en Operaciones Bancarias</p>
 </div>
 </div>
@@ -486,7 +637,7 @@
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
 </div>
-<p class="text-on-background italic flex-grow">"Recomiendo ampliamente a Paola Amarilla por su excelente capacidad de mentoría. Su guía no solo transformó mi perfil profesional, sino que me enseñó a medir y valorar mi propio trabajo."</p>
+<p class="text-on-background italic flex-grow text-sm md:text-base">"Recomiendo ampliamente a Paola Amarilla por su excelente capacidad de mentoría. Su guía no solo transformó mi perfil profesional, sino que me enseñó a medir y valorar mi propio trabajo."</p>
 </div>
 <!-- Testimonial 2 -->
 <div class="bg-surface-container-low p-8 rounded-xl flex flex-col h-full">
@@ -495,7 +646,7 @@
 <img class="w-full h-full object-cover" data-alt="A professional headshot of Luana Zarate, a female administrative professional. She has a bright smile and looks confident and modern. Natural daylight, elegant composition, light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1ihPPi1AtLbo9GtlOuHf2LP4k9pgytPartcL_zWR9DFlZyM9FTf0SGTPsaTZif7VhC4lkmb64ByETY0Qx-0C5fnIC4hWIcvk_me7qyKIhvb-OP-EUJhOhM5Y5vvvVsMJIwNe5y3b7tJ3Bvtd37thuaE-EpI3Xl5K9k7Rdl_vlOe9k77bK2AM1jxN9SpVDonB3PaENeOAkKKJUSyWjHM-1mANp49iZo52x669zrxC5jOywtDVVulreXupeP1CZeNx_a77sUqBcSg"/>
 </div>
 <div>
-<p class="font-bold text-on-background">Luana Zarate</p>
+<p class="font-bold text-sm md:text-base text-on-background">Luana Zarate</p>
 <p class="text-xs text-secondary">Asistente Administrativa</p>
 </div>
 </div>
@@ -506,7 +657,7 @@
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
 </div>
-<p class="text-on-background italic flex-grow">"Quiero recomendar muchísimo a Pao por toda la ayuda y las asesorías que implementa. Gracias a sus consejos pude destacar mejor mi perfil profesional, ganar más confianza y enfocarme mejor en mis capacidades."</p>
+<p class="text-on-background italic flex-grow text-sm md:text-base">"Quiero recomendar muchísimo a Pao por toda la ayuda y las asesorías que implementa. Gracias a sus consejos pude destacar mejor mi perfil profesional, ganar más confianza y enfocarme mejor en mis capacidades."</p>
 </div>
 <!-- Testimonial 3 -->
 <div class="bg-surface-container-low p-8 rounded-xl flex flex-col h-full">
@@ -515,7 +666,7 @@
 <img class="w-full h-full object-cover" data-alt="A professional headshot of Wilder Duarte, a male engineer. He appears serious yet approachable, wearing professional work-appropriate clothing. The background is a clean architectural setting with soft shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSZhLCz0jTEOoeClneFT-J4zAMmkKf8kL9sNjTPySAPGvNxcPx8F-ASXLKnjuB8Baf8lCseHCm_fPWVzIPSu5MhS-YThCmHG3Dhvjo-8EV1kwOLyA-uaouAOq9ZdfGoKfyA1yaiXo95wjM79Z3Gj2Q-XsYFyhVTPySWx4d8xzvQJJjOgWd_bJ1x4UftAbrHlhlZ0A9FicCT4VwiLVOrtQ3if9zKH_5LHqLqtv5LVB0pyTnR2XrAIc30V3NH88f6noBOkSFVujFmQ"/>
 </div>
 <div>
-<p class="font-bold text-on-background">Wilder Duarte</p>
+<p class="font-bold text-sm md:text-base text-on-background">Wilder Duarte</p>
 <p class="text-xs text-secondary">Ingeniero Electricista</p>
 </div>
 </div>
@@ -526,7 +677,7 @@
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
 </div>
-<p class="text-on-background italic flex-grow">"Excelente Profesional, te encamina y comparte sus conocimientos con mucha claridad, se nota la experiencia y compromiso que le pone a su trabajo. Muy conforme con el resultado."</p>
+<p class="text-on-background italic flex-grow text-sm md:text-base">"Excelente Profesional, te encamina y comparte sus conocimientos con mucha claridad, se nota la experiencia y compromiso que le pone a su trabajo. Muy conforme con el resultado."</p>
 </div>
 </div>
 <!-- Video Testimonial -->
@@ -548,18 +699,18 @@
 <!-- Final CTA Section -->
 <section class="py-section-padding-mobile md:py-section-padding-vertical px-6 bg-tertiary">
 <div class="max-w-container-max mx-auto text-center">
-<div class="bg-primary-container/20 border border-on-primary-container/20 p-16 rounded-3xl backdrop-blur-sm relative overflow-hidden">
+<div class="bg-primary-container/20 border border-on-primary-container/20 p-8 md:p-16 rounded-3xl backdrop-blur-sm relative overflow-hidden">
 <!-- Abstract visual element -->
 <div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
 <div class="absolute bottom-0 left-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -ml-32 -mb-32"></div>
-<h2 class="font-display-lg text-[30px] md:text-display-lg text-on-tertiary mb-8 relative z-10">
+<h2 class="font-display-lg text-2xl md:text-display-lg text-on-tertiary mb-4 md:mb-8 relative z-10">
                     Tu próxima oportunidad puede estar más cerca de lo que pensás
                 </h2>
-<p class="font-body-lg text-body-lg text-on-tertiary/80 mb-12 max-w-2xl mx-auto relative z-10">
+<p class="font-body-lg text-sm md:text-body-lg text-on-tertiary/80 mb-6 md:mb-12 max-w-2xl mx-auto relative z-10">
                     Una entrevista no es solo responder preguntas. Es mostrar quién sos como profesional.
                 </p>
-<button class="bg-on-tertiary text-primary px-12 py-5 rounded-lg font-label-caps text-label-caps hover:opacity-90 transition-opacity editorial-shadow relative z-10">Quiero agendar mi sesión</button>
-<div class="mt-12 flex justify-center gap-8 text-on-tertiary/60 font-label-caps text-label-caps relative z-10">
+<button class="bg-on-tertiary text-primary px-6 py-3 md:px-12 md:py-5 rounded-[999px] whitespace-nowrap font-label-caps text-[10px] md:text-label-caps hover:opacity-90 transition-opacity editorial-shadow relative z-10">Quiero agendar mi sesión</button>
+<div class="mt-6 md:mt-12 flex justify-center gap-6 md:gap-8 text-on-tertiary/60 font-label-caps text-[10px] md:text-label-caps relative z-10">
 <a class="hover:text-on-tertiary transition-colors" href="#">Instagram</a>
 <a class="hover:text-on-tertiary transition-colors" href="#">WhatsApp</a>
 <a class="hover:text-on-tertiary transition-colors" href="#">TikTok</a>
@@ -569,18 +720,37 @@
 </section>
 <!-- Footer -->
 <footer class="bg-tertiary border-t border-white/5">
-<div class="flex flex-col md:flex-row justify-between items-center w-full px-6 py-12 max-w-container-max mx-auto">
-<div class="mb-8 md:mb-0">
-<p class="font-headline-md text-headline-md text-on-tertiary mb-2">Paola Amarilla</p>
-<p class="font-body-md text-body-md text-on-tertiary/50">Mentoring Laboral 1:1 x Paola Amarilla</p>
+<div class="max-w-container-max mx-auto px-6 pt-14 md:pt-20 pb-8">
+<div class="max-w-2xl mx-auto text-center mb-12 md:mb-16">
+<span class="material-symbols-outlined text-on-tertiary/40 mb-3 block" style="font-size: 26px;">format_quote</span>
+<p class="font-headline-md text-sm md:text-headline-md italic text-on-tertiary leading-relaxed">Muchas veces no se trata de tener más experiencia, sino de saber mostrar todo lo que ya tenés.</p>
+<p class="font-label-caps text-[10px] md:text-label-caps text-on-tertiary/40 uppercase tracking-widest mt-4">— Paola Amarilla</p>
 </div>
-<div class="flex flex-col md:items-end gap-4">
-<div class="flex gap-6 mb-4">
+<div class="border-t border-white/10 pt-10 md:pt-12 grid gap-10 md:grid-cols-3 text-center md:text-left">
+<div class="flex flex-col items-center md:items-start">
+<img alt="Paola Amarilla" class="h-9 w-auto mb-3 brightness-0 invert" src="logo-transparente.png"/>
+<p class="font-body-md text-sm text-on-tertiary/50 max-w-[220px]">Coach laboral y consultora en entrevistas. Preparación estratégica 1:1.</p>
+</div>
+<div class="flex flex-col items-center md:items-start">
+<p class="font-label-caps text-[10px] md:text-label-caps text-on-tertiary/40 uppercase tracking-widest mb-4">Enlaces rápidos</p>
+<div class="flex flex-col items-center md:items-start gap-3">
+<a class="text-tertiary-fixed-dim hover:text-on-tertiary transition-colors font-body-md text-sm" href="#">Inicio</a>
+<a class="text-tertiary-fixed-dim hover:text-on-tertiary transition-colors font-body-md text-sm" href="#entrevistas">Entrevistas</a>
+<a class="text-tertiary-fixed-dim hover:text-on-tertiary transition-colors font-body-md text-sm" href="#consultoria">Consultoría</a>
+<a class="text-tertiary-fixed-dim hover:text-on-tertiary transition-colors font-body-md text-sm" href="#mentoring">Mentoring 1:1</a>
+</div>
+</div>
+<div class="flex flex-col items-center md:items-start">
+<p class="font-label-caps text-[10px] md:text-label-caps text-on-tertiary/40 uppercase tracking-widest mb-4">Seguime</p>
+<div class="flex gap-6 mb-6">
 <a class="text-tertiary-fixed-dim hover:text-on-tertiary transition-colors font-label-caps text-label-caps hover:underline" href="#">Instagram</a>
 <a class="text-tertiary-fixed-dim hover:text-on-tertiary transition-colors font-label-caps text-label-caps hover:underline" href="#">WhatsApp</a>
 <a class="text-tertiary-fixed-dim hover:text-on-tertiary transition-colors font-label-caps text-label-caps hover:underline" href="#">LinkedIn</a>
 </div>
-<p class="text-on-tertiary/30 text-xs font-label-caps">© 2024 Paola Amarilla - Coach Laboral &amp; Consultora en Entrevistas. Todos los derechos reservados.</p>
+</div>
+</div>
+<div class="border-t border-white/10 mt-10 pt-6 text-center">
+<p class="text-on-tertiary/30 text-xs font-label-caps">© 2026 Paola Amarilla - Coach Laboral &amp; Consultora en Entrevistas. Todos los derechos reservados.</p>
 </div>
 </div>
 </footer>
@@ -609,6 +779,117 @@
         const hero = document.querySelector('section');
         hero.classList.remove('opacity-0', 'translate-y-8');
         hero.classList.add('opacity-100');
+
+        // Reveal effect for the "Sobre mí" portrait on scroll
+        const portrait = document.querySelector('.portrait-reveal');
+        if (portrait) {
+            const portraitObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        portraitObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            portraitObserver.observe(portrait);
+        }
+
+        // Servicios tabs
+        (() => {
+            const tabList = document.getElementById('servicios-tablist');
+            const tabButtons = tabList ? Array.from(tabList.querySelectorAll('[data-tab]')) : [];
+            const panels = Array.from(document.querySelectorAll('#servicios-panels [data-tab-panel]'));
+            const serviciosSection = document.getElementById('servicios');
+            const scrollHint = document.getElementById('tabs-scroll-hint');
+            const scrollHintLeft = document.getElementById('tabs-scroll-hint-left');
+
+            const ACTIVE_TAB_CLASSES = ['bg-primary', 'text-on-primary', 'border-primary', 'editorial-shadow'];
+            const INACTIVE_TAB_CLASSES = ['bg-surface-container-low', 'text-secondary', 'border-transparent'];
+
+            // Las flechitas de mobile no dependen del scroll (poco confiable con
+            // scrollIntoView/snap) sino de qué tab está activo: la de "volver"
+            // solo aparece si no estás en el primer tab, la de "avanzar" solo
+            // si no estás en el último.
+            const updateArrows = () => {
+                const currentIndex = tabButtons.findIndex((btn) => btn.getAttribute('aria-selected') === 'true');
+                if (scrollHintLeft) scrollHintLeft.style.opacity = currentIndex > 0 ? '1' : '0';
+                if (scrollHint) scrollHint.style.opacity = currentIndex > -1 && currentIndex < tabButtons.length - 1 ? '1' : '0';
+            };
+
+            const activateTab = (tabName, { focusTab = false } = {}) => {
+                tabButtons.forEach((btn) => {
+                    const isActive = btn.dataset.tab === tabName;
+                    btn.setAttribute('aria-selected', String(isActive));
+                    btn.tabIndex = isActive ? 0 : -1;
+                    btn.classList.remove(...(isActive ? INACTIVE_TAB_CLASSES : ACTIVE_TAB_CLASSES));
+                    btn.classList.add(...(isActive ? ACTIVE_TAB_CLASSES : INACTIVE_TAB_CLASSES));
+                    if (isActive) btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                });
+
+                // Los 3 paneles viven apilados en la misma celda de grid (ver CSS
+                // #servicios-panels/.service-panel), así que el contenedor siempre
+                // mide lo que mide el panel más alto y cambiar de tab no genera
+                // saltos de layout en el resto de la página.
+                panels.forEach((panel) => {
+                    const isActive = panel.dataset.tabPanel === tabName;
+                    panel.classList.toggle('opacity-0', !isActive);
+                    panel.classList.toggle('opacity-100', isActive);
+                    panel.classList.toggle('pointer-events-none', !isActive);
+                    panel.setAttribute('aria-hidden', String(!isActive));
+                    panel.inert = !isActive;
+                });
+
+                if (focusTab) {
+                    const activeBtn = tabButtons.find((btn) => btn.dataset.tab === tabName);
+                    if (activeBtn) activeBtn.focus();
+                }
+
+                updateArrows();
+            };
+
+            updateArrows();
+
+            if (scrollHint) {
+                scrollHint.addEventListener('click', () => {
+                    const currentIndex = tabButtons.findIndex((btn) => btn.getAttribute('aria-selected') === 'true');
+                    if (currentIndex > -1 && currentIndex < tabButtons.length - 1) activateTab(tabButtons[currentIndex + 1].dataset.tab);
+                });
+            }
+            if (scrollHintLeft) {
+                scrollHintLeft.addEventListener('click', () => {
+                    const currentIndex = tabButtons.findIndex((btn) => btn.getAttribute('aria-selected') === 'true');
+                    if (currentIndex > 0) activateTab(tabButtons[currentIndex - 1].dataset.tab);
+                });
+            }
+
+            tabButtons.forEach((btn) => {
+                btn.addEventListener('click', () => activateTab(btn.dataset.tab));
+            });
+
+            if (tabList) {
+                tabList.addEventListener('keydown', (e) => {
+                    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+                    const currentIndex = tabButtons.findIndex((btn) => btn.getAttribute('aria-selected') === 'true');
+                    const delta = e.key === 'ArrowRight' ? 1 : -1;
+                    const nextIndex = (currentIndex + delta + tabButtons.length) % tabButtons.length;
+                    e.preventDefault();
+                    activateTab(tabButtons[nextIndex].dataset.tab, { focusTab: true });
+                });
+            }
+
+            // Los links del nav que antes saltaban a cada sección ahora
+            // activan el tab correspondiente sin perder la posición de scroll.
+            document.querySelectorAll('a[href="#entrevistas"], a[href="#consultoria"], a[href="#mentoring"]').forEach((link) => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const tabName = link.getAttribute('href').slice(1);
+                    activateTab(tabName);
+                    if (serviciosSection) {
+                        serviciosSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        })();
 
         // Mobile menu toggle
         const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
